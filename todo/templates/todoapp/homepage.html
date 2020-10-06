@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}
+    HomePage-{{ block.super }}
+{% endblock %}
+{% block content %}
+    <form action="/addtask/" method="post">
+        {% csrf_token %}
+        <input type="text" name="task">
+        <input type="submit" value="add" class="btn btn-success">
+        {% for mytodo in mytodos %}
+            <p> {{ mytodo.task}}
+                <a href="/delete/{{mytodo.id}}/" class="btn btn-danger">Delete</a>
+                <a href="/edittask/{{mytodo.id}}/" class="btn btn-warning">edit</a></p>
+        {% endfor %}
+    </form>
+{% endblock %}
